@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>{{project.name}}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="createTask()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #popoverContent padding class="popover-page">
+  <ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+    <h3>{{item.name}}</h3>
+    <p>{{item.description}}</p>
+  </ion-item>
+</ion-content>

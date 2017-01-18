@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-navbar align-title="left" class="bar-positive">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>{{task.name}}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        {{ task.name }}
+      </ion-card-title>
+      <p>
+        {{ task.description }}
+      </p>
+    </ion-card-content>
+
+    <ion-item *ngIf="task.priority">
+      <ion-icon name='timer' item-left></ion-icon>
+      Priority
+      <ion-badge item-right>{{task.priority}}</ion-badge>
+    </ion-item>
+
+    <ion-item *ngIf="task.labels?.length > 0">
+      <ion-icon name="pricetag" item-left large ></ion-icon>
+      <h2>Categories</h2>
+      <p>
+        <span *ngFor="let label of task.labels">
+        <ion-badge color="{{label.color}}">
+          {{label.name}}
+        </ion-badge>
+        </span>
+      </p>
+    </ion-item>
+
+    <ion-item *ngIf="task.assigned">
+      <ion-icon name='person' item-left></ion-icon>
+      Assigned to
+      <ion-note item-right style="color: black;">
+        {{task.assigned.username}}
+      </ion-note>
+    </ion-item>
+
+  </ion-card>
+</ion-content>

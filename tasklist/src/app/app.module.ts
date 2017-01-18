@@ -1,0 +1,47 @@
+import { NgModule, ErrorHandler } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { MyApp } from './app.component';
+import { Home } from '../pages/home/home';
+import { ListProject } from '../pages/listProject/listProject';
+import { ListTask, PopOverPage } from '../pages/listTask/listTask';
+import { ModalAddProject } from '../pages/modalAddProject/modalAddProject';
+import { ModalAddTask } from '../pages/modalAddTask/modalAddTask';
+import { Login } from '../pages/login/login';
+import { DetailTask } from '../pages/detailTask/detailTask';
+import { MyTask } from '../pages/myTask/myTask';
+
+@NgModule({
+  declarations: [
+    MyApp,
+    Home,
+    ListProject,
+    ListTask,
+    ModalAddProject,
+    Login,
+    DetailTask,
+    ModalAddTask,
+    PopOverPage,
+    MyTask
+  ],
+  imports: [
+    IonicModule.forRoot(MyApp, {
+      hostApi: 'http://localhost:8000/api/v1'
+    }
+    )
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    Home,
+    ListProject,
+    ListTask,
+    ModalAddProject,
+    Login,
+    DetailTask,
+    ModalAddTask,
+    PopOverPage,
+    MyTask
+  ],
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+})
+export class AppModule {}
