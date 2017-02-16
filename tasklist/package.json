@@ -40,5 +40,5 @@
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [],
-  "description": "veganApp: An Ionic project"
+  "description": "ColabTask: A colaborative task manager"
 }
