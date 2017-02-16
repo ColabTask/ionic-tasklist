@@ -32,12 +32,28 @@ export class ListProject {
     });
   }
 
-  deleteProject(event, item) {
-    let toast = this.toastCtrl.create({
-      message: item.title + ' has been deleted',
-      duration: 3000
-    });
-    toast.present();
+  deleteProject(item) {
+    let title = item.title;
+
+    this.projectService.deleteProject(item.id).subscribe(
+      data => {
+        let toast = this.toastCtrl.create({
+          message: title + ' has been deleted',
+          duration: 3000
+        });
+        toast.present();
+
+        // Refresh project list
+        this.getDataFromApi();
+      },
+      err => {
+        let toast = this.toastCtrl.create({
+          message: 'Error : Connection server',
+          dismissOnPageChange: true
+        });
+        toast.present();
+      }
+    );
   }
 
   openModal() {

@@ -29,4 +29,12 @@ export class ProjectService {
     return this.http.post(this.propertiesURL, data, options)
       .map(response => response.json());
   }
+
+  deleteProject(id) {
+    let headers = new Headers();
+    headers.append('Authorization', 'Token ' + this.token);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.delete(this.propertiesURL + "/" + id, options)
+      .map(response => response.json());
+  }
 }
