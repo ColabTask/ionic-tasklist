@@ -20,6 +20,21 @@ export class TaskService {
       .map(response => response.json());
   }
 
+  createTask(task, project) {
+    let data = new URLSearchParams();
+    data.append('name', task.name);
+    data.append('project_id', project.id);
+
+    if(task.description){
+      data.append('description', task.description);
+    }
+    let headers = new Headers();
+    headers.append('Authorization', 'Token ' + this.token);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.propertiesURL, data, options)
+      .map(response => response.json());
+  }
+
   getTasksByAssigned(id){
     let headers = new Headers();
     headers.append('Authorization', 'Token ' + this.token);

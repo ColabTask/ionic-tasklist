@@ -13,47 +13,16 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <form (ngSubmit)="createForm()">
     <ion-item>
       <ion-label stacked>Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="task.name" name="name"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Categories</ion-label>
-      <ion-select multiple="true" cancelText="Cancel" okText="Save">
-        <ion-option value="bacon" checked="true">Finance</ion-option>
-        <ion-option value="olives">Promotion</ion-option>
-        <ion-option value="xcheese" checked="true">Blocked</ion-option>
-        <ion-option value="peppers">Stakolder</ion-option>
-      </ion-select>
+      <ion-label stacked>Name</ion-label>
+      <ion-textarea rows="6" [(ngModel)]="task.description" name="name"></ion-textarea>
     </ion-item>
-
-    <ion-item>
-      <ion-label stacked>Assigned to</ion-label>
-      <ion-select>
-        <ion-option value="nes">RignonNoel</ion-option>
-        <ion-option value="n64">Rapheko</ion-option>
-        <ion-option value="ps">Krisprol</ion-option>
-        <ion-option value="genesis">Maximinou</ion-option>
-        <ion-option value="saturn">Copain1</ion-option>
-        <ion-option value="snes">Copain2</ion-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-list-header>
-      Priority
-    </ion-list-header>
-
-    <ion-item>
-      <ion-range min="1" max="5" step="1" snaps="true" pin="true">
-        <ion-icon range-left small name="timer"></ion-icon>
-        <ion-icon range-right name="timer"></ion-icon>
-      </ion-range>
-    </ion-item>
-  </ion-list>
-
-  <div padding>
-    <button ion-button color="secondary" block (click)="dismiss()">Create</button>
-  </div>
+    <button ion-button type="submit" block>Add Task</button>
+  </form>
 </ion-content>

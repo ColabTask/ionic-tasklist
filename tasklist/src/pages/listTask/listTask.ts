@@ -45,6 +45,10 @@ export class ListTask {
     public toastCtrl: ToastController
   ) {
     this.project = navParams.get("project");
+    this.getDataFromApi();
+  }
+
+  getDataFromApi(){
     this.taskService.getTasksByProject(this.project.id).subscribe(
       data => {
         this.items = data;
@@ -74,7 +78,10 @@ export class ListTask {
   }
 
   createTask() {
-    let modal = this.modalCtrl.create(ModalAddTask);
+    let modal = this.modalCtrl.create(ModalAddTask, { project: this.project });
+    modal.onDidDismiss(() => {
+      this.getDataFromApi();
+    });
     modal.present();
   }
 }
