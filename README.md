@@ -1,46 +1,32 @@
 # Colabtask
 
-## Install ionic
-This section is based on this [getting started from Ionic.io](http://ionicframework.com/getting-started/)
+ColabTask is collaborative task manager available
+as a website and a mobile application on Android,
+iOS and Windows phone based on Ionic v2.
 
-```
-npm install -g cordova ionic
-```
+## About this repository
+This repository is a mobile application based
+on [Ionic v2](http://ionicframework.com/) who can
+run on Android, iOS and Windows phone.
 
-## Install projects requirements
-```
-cd ionic-tasklist/tasklist
-npm install
-```
+If you want to use this application on our own you need to install [the web API](https://github.com/RignonNoel/tasklist) of ColabTask which is under the same license and developed by the same group of people.
 
-## Run a simulation on browser
+## Ressources
+You can follow the project as a Kanboard in our [Waffle](https://waffle.io/RignonNoel/ionic-tasklist)
 
-To run a simulation just use the command `ionic serve`.
+## How to install and use
 
-You can use the Responsive Design Mode of your browser if you have one to see the render on a specific device.
+Please refer to the `INSTALL.md` file.
 
-* [Documentation for Firefox](https://developer.mozilla.org/en-US/docs/Tools/Responsive_Design_Mode)
-* [Documentation for Chrome](https://developers.google.com/web/tools/chrome-devtools/device-mode/)
+## How to contribute
 
-## Installation on Android device
+Contribution are welcome, please refer to the `CONTRIBUTING.md` file to know how to contribute to the project.
 
-To compile and deploy on Android device you need to :
+**You can also contribute to the project by**:
+ - promoting it to your friends and family
+ - using it and share with us your opinion
+ - proposing new ideas as an issue in this repository
 
-1. Install android SDK (package `android-sdk`)
-2. Install some package with the package manager of your android SDK
-3. Install a Java Development Kit (JDK)
-4. Define environment variables `ANDROID_HOME` and `JAVA_HOME`
-5. Put your device in debug mode
-6. Plug your device to your computer
-7. Run ionic command to compile and deploy
+## License
 
-```
-export ANDROID_HOME=$HOME/Android/Sdk
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
-ionic run android --device
-```
-
-## Installation on iOS device
-
-This part is not documented and need an upgrade.
-Feel free to contribute to the project on this purpose.
+ColabTask is a free software published under the GNU AFFERO GENERAL PUBLIC licence, version 3.
