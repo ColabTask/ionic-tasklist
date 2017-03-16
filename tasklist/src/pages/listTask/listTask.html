@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="main">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -17,9 +17,20 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content #popoverContent padding class="popover-page">
-  <ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-    <h3>{{item.name}}</h3>
-    <p>{{item.description}}</p>
-  </ion-item>
+<ion-content>
+  <ion-list inset>
+    <ion-item-sliding *ngFor="let item of items">
+      <ion-item (click)="itemTapped($event, item)">
+        <h3>{{item.name}}</h3>
+        <p>{{item.description}}</p>
+      </ion-item>
+
+      <ion-item-options side="right">
+        <button ion-button color="danger">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
