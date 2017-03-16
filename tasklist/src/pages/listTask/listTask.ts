@@ -50,9 +50,8 @@ export class ListTask {
 
   getDataFromApi(){
     this.taskService.getTasksByProject(this.project.id).subscribe(
-      data => {
-        this.items = data;
-        console.log(data);
+      response => {
+        this.items = response.json()
       },
       err => {
         let toast = this.toastCtrl.create({

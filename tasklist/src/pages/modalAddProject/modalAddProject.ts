@@ -25,8 +25,8 @@ export class ModalAddProject {
   createForm() {
     console.log(this.project);
     this.projectService.createProject(this.project).subscribe(
-      data => {
-        console.log(data);
+      response => {
+        console.log(response);
         this.viewCtrl.dismiss();
       },
       err => {
