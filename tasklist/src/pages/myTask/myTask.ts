@@ -46,9 +46,8 @@ export class MyTask {
   ) {
     this.project = navParams.get("project");
     this.taskService.getTasksByAssigned(1).subscribe(
-      data => {
-        this.items = data;
-        console.log(data);
+      response => {
+        this.items = response.json()
       },
       err => {
         let toast = this.toastCtrl.create({

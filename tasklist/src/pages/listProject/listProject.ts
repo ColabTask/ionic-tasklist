@@ -36,7 +36,7 @@ export class ListProject {
     let title = item.title;
 
     this.projectService.deleteProject(item.id).subscribe(
-      data => {
+      response => {
         let toast = this.toastCtrl.create({
           message: title + ' has been deleted',
           duration: 3000
@@ -66,8 +66,8 @@ export class ListProject {
 
   getDataFromApi() {
     this.projectService.listProjects().subscribe(
-      data => {
-        this.items = data;
+      response => {
+        this.items = response.json()
       },
       err => {
         let toast = this.toastCtrl.create({

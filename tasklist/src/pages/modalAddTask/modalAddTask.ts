@@ -28,8 +28,8 @@ export class ModalAddTask {
   createForm() {
     console.log(this.task);
     this.taskService.createTask(this.task, this.project).subscribe(
-      data => {
-        console.log(data);
+      response => {
+        console.log(response);
         this.viewCtrl.dismiss();
       },
       err => {
