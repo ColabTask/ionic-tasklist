@@ -9,6 +9,7 @@ import { ModalAddTask } from '../pages/modalAddTask/modalAddTask';
 import { Login } from '../pages/login/login';
 import { DetailTask } from '../pages/detailTask/detailTask';
 import { MyTask } from '../pages/myTask/myTask';
+import { Storage } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -26,8 +27,7 @@ import { MyTask } from '../pages/myTask/myTask';
   imports: [
     IonicModule.forRoot(MyApp, {
       hostApi: 'http://localhost:8000/api/v1'
-    }
-    )
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -42,6 +42,12 @@ import { MyTask } from '../pages/myTask/myTask';
     PopOverPage,
     MyTask
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    {
+      provide: ErrorHandler,
+      useClass: IonicErrorHandler
+    },
+    Storage
+  ]
 })
 export class AppModule {}
