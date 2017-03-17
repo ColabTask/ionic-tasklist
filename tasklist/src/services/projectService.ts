@@ -37,6 +37,12 @@ export class ProjectService {
         .switchMap((options) => this.http.get(this.propertiesURL, options));
   }
 
+  listProjectUsers(id) {
+    return Observable
+        .fromPromise(this.buildOptions(null))
+        .switchMap((options) => this.http.get(this.propertiesURL + "/" + id + "/access", options));
+  }
+
   createProject(project) {
     let data = new URLSearchParams();
     data.append('name', project.name);

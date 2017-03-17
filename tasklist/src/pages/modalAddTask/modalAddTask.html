@@ -20,9 +20,17 @@
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Name</ion-label>
-      <ion-textarea rows="6" [(ngModel)]="task.description" name="name"></ion-textarea>
+      <ion-label stacked>Description</ion-label>
+      <ion-textarea rows="6" [(ngModel)]="task.description" name="description"></ion-textarea>
     </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Assigned to</ion-label>
+      <ion-select [(ngModel)]="task.assigned" name="assigned">
+        <ion-option *ngFor="let user of users" value="{{user.id}}">{{user.username}}</ion-option>
+      </ion-select>
+    </ion-item>
+
     <button ion-button type="submit" block>Add Task</button>
   </form>
 </ion-content>
