@@ -45,13 +45,15 @@ export class TaskService {
     data.append('project_id', project.id);
 
     if(task.description){
-      console.log("===> Description");
       data.append('description', task.description);
     }
 
     if(task.assigned){
-      console.log("===> Assignement : " + task.assigned);
       data.append('assigned_id', task.assigned);
+    }
+
+    if(task.priority){
+      data.append('priority', task.priority);
     }
 
     return Observable

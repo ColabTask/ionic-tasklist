@@ -25,6 +25,14 @@
     </ion-item>
 
     <ion-item>
+      <ion-label stacked>Priority</ion-label>
+      <ion-range [(ngModel)]="task.priority" name="priority" min="0" max="10" step="1" snaps="true" pin="true">
+        <ion-icon range-left small name="timer"></ion-icon>
+        <ion-icon range-right name="timer"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+    <ion-item>
       <ion-label stacked>Assigned to</ion-label>
       <ion-select [(ngModel)]="task.assigned" name="assigned">
         <ion-option *ngFor="let user of users" value="{{user.id}}">{{user.username}}</ion-option>
