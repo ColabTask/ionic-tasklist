@@ -20,36 +20,43 @@
       <ion-card-title>
         {{ task.name }}
       </ion-card-title>
-      <p>
+      <p *ngIf="task.description">
         {{ task.description }}
+      </p>
+      <p *ngIf="!task.description">
+        No description for the moment.
       </p>
     </ion-card-content>
 
-    <ion-item *ngIf="task.priority">
-      <ion-icon name='timer' item-left></ion-icon>
-      Priority
-      <ion-badge item-right>{{task.priority}}</ion-badge>
-    </ion-item>
+    <ion-list>
+      <ion-item>
+          <ion-icon name="folder" color="main" item-left></ion-icon>
+          {{task.project.name}}
+      </ion-item>
 
-    <ion-item *ngIf="task.labels?.length > 0">
-      <ion-icon name="pricetag" item-left large ></ion-icon>
-      <h2>Categories</h2>
-      <p>
-        <span *ngFor="let label of task.labels">
-        <ion-badge color="{{label.color}}">
-          {{label.name}}
-        </ion-badge>
-        </span>
-      </p>
-    </ion-item>
+      <ion-item *ngIf="task.priority">
+        <ion-icon name='timer' color="main" item-left></ion-icon>
+        Priority
+        <ion-badge item-right>{{task.priority}}</ion-badge>
+      </ion-item>
 
-    <ion-item *ngIf="task.assigned">
-      <ion-icon name='person' item-left></ion-icon>
-      Assigned to
-      <ion-note item-right style="color: black;">
-        {{task.assigned.username}}
-      </ion-note>
-    </ion-item>
+      <ion-item *ngIf="task.labels?.length > 0">
+        <ion-icon name="pricetag" color="main" item-left large ></ion-icon>
+        <h2>Categories</h2>
+        <p>
+          <span *ngFor="let label of task.labels">
+          <ion-badge color="{{label.color}}">
+            {{label.name}}
+          </ion-badge>
+          </span>
+        </p>
+      </ion-item>
 
+      <ion-item *ngIf="task.assigned">
+        <ion-icon name='person' color="main" item-left></ion-icon>
+        Assigned to
+        <ion-badge item-right>{{task.assigned.username}}</ion-badge>
+      </ion-item>
+    </ion-list>
   </ion-card>
 </ion-content>
