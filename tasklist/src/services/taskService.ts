@@ -39,12 +39,21 @@ export class TaskService {
   }
 
   createTask(task, project) {
+    console.log("==> Create task");
     let data = new URLSearchParams();
     data.append('name', task.name);
     data.append('project_id', project.id);
 
     if(task.description){
       data.append('description', task.description);
+    }
+
+    if(task.assigned){
+      data.append('assigned_id', task.assigned);
+    }
+
+    if(task.priority){
+      data.append('priority', task.priority);
     }
 
     return Observable
