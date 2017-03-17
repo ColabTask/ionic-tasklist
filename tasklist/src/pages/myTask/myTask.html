@@ -20,6 +20,9 @@
 <ion-content #popoverContent padding class="popover-page">
   <ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
     <h3>{{item.name}}</h3>
-    <p>{{item.description}}</p>
+    <p>
+      <ion-icon name="folder" color="main" item-left></ion-icon>
+      {{item.project.name}}
+    </p>
   </ion-item>
 </ion-content>
