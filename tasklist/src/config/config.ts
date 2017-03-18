@@ -6,18 +6,18 @@ declare var require:any;
 export class Config {
 	public static CONFIGURATION_PATH = '.';
 
-    private static _config: Object;
-    private static _env: Object;
+  private static _config: Object;
+  private static _env: Object;
 
-    constructor() {}
+  constructor() {}
 
-    public load() {
-        return new Promise((resolve, reject) => {
-            Config._env = require(Config.CONFIGURATION_PATH + '/env.json');
-            Config._config = require(Config.CONFIGURATION_PATH + '/' + Config._env['environment'] + '.json');
-            resolve(true);
-        });
-    }
+  public load() {
+    return new Promise((resolve, reject) => {
+      Config._env = require(Config.CONFIGURATION_PATH + '/env.json');
+      Config._config = require(Config.CONFIGURATION_PATH + '/' + Config._env['environment'] + '.json');
+      resolve(true);
+    });
+  }
 
 	/**
 	 * Get a configuration
@@ -25,9 +25,9 @@ export class Config {
 	 * @param {any} def Default value if key is not found
 	 * @return any
 	 */
-    public get(key:string, def:any = ''): any {
-        return !this.has(key) ? def : Config._config[key];
-    }
+  public get(key:string, def:any = ''): any {
+    return !this.has(key) ? def : Config._config[key];
+  }
 
 	/**
 	 * Check if the key exists

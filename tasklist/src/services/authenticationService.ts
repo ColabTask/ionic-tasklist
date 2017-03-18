@@ -9,7 +9,7 @@ export class AuthenticationService {
   public serverURL:string;
 
   constructor (protected http:Http, private _config:Config) {
-	this.serverURL = _config.get('apiUrl');
+	  this.serverURL = _config.get('apiUrl');
   }
 
   authenticate(username, password) {
