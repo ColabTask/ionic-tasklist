@@ -3,14 +3,17 @@ import 'rxjs/add/operator/map';
 import {Injectable} from "@angular/core";
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
+import { Config } from '../config/config';
 
 
 @Injectable()
 export class UserService {
-  serverURL = 'http://198.27.119.182/api/v1';
-  propertiesURL = this.serverURL + '/users';
+  public serverURL:string;
+  public propertiesURL:string;
 
-  constructor (protected http:Http) {
+  constructor (protected http:Http, private _config:Config) {
+	  this.serverURL = _config.get('apiUrl');
+	  this.propertiesURL = this.serverURL + '/users';
   }
 
   buildOptions(params){

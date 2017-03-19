@@ -1,13 +1,15 @@
 import {Http, URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Injectable} from "@angular/core";
+import {Config} from '../config/config';
 
 
 @Injectable()
 export class AuthenticationService {
-  serverURL = 'http://198.27.119.182/api/v1';
+  public serverURL:string;
 
-  constructor (protected http:Http) {
+  constructor (protected http:Http, private _config:Config) {
+	  this.serverURL = _config.get('apiUrl');
   }
 
   authenticate(username, password) {

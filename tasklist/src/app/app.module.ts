@@ -10,6 +10,7 @@ import { Login } from '../pages/login/login';
 import { DetailTask } from '../pages/detailTask/detailTask';
 import { MyTask } from '../pages/myTask/myTask';
 import { Storage } from '@ionic/storage';
+import { Config } from '../config/config';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { Storage } from '@ionic/storage';
     DetailTask,
     ModalAddTask,
     PopOverPage,
-    MyTask
+	MyTask
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -40,14 +41,15 @@ import { Storage } from '@ionic/storage';
     DetailTask,
     ModalAddTask,
     PopOverPage,
-    MyTask
+	MyTask
   ],
   providers: [
     {
       provide: ErrorHandler,
       useClass: IonicErrorHandler
     },
-    Storage
+    Storage,
+    Config
   ]
 })
 export class AppModule {}
