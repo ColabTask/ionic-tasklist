@@ -69,6 +69,50 @@ export class ListTask {
     });
   }
 
+  closeTask(item) {
+    this.taskService.closeTask(item.id).subscribe(
+      response => {
+        let toast = this.toastCtrl.create({
+          message: item.name + ' has been closed',
+          duration: 3000
+        });
+        toast.present();
+
+        // Refresh project list
+        this.getDataFromApi();
+      },
+      err => {
+        let toast = this.toastCtrl.create({
+          message: 'Error : Connection server',
+          dismissOnPageChange: true
+        });
+        toast.present();
+      }
+    );
+  }
+
+  openTask(item) {
+    this.taskService.openTask(item.id).subscribe(
+      response => {
+        let toast = this.toastCtrl.create({
+          message: item.name + ' has been opened',
+          duration: 3000
+        });
+        toast.present();
+
+        // Refresh project list
+        this.getDataFromApi();
+      },
+      err => {
+        let toast = this.toastCtrl.create({
+          message: 'Error : Connection server',
+          dismissOnPageChange: true
+        });
+        toast.present();
+      }
+    );
+  }
+
   presentPopover(event) {
     let popover = this.popoverCtrl.create(PopOverPage);
     popover.present({
