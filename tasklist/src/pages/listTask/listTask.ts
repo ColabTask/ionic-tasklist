@@ -48,6 +48,10 @@ export class ListTask {
     this.getDataFromApi();
   }
 
+  ionViewWillEnter() {
+    this.getDataFromApi();
+  }
+
   getDataFromApi(){
     this.taskService.getTasksByProject(this.project.id).subscribe(
       response => {
