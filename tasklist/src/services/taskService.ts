@@ -64,6 +64,21 @@ export class TaskService {
         .switchMap((options) => this.http.post(this.propertiesURL, data, options));
   }
 
+  editTask(task, project) {
+    console.log("==> Edit task");
+    let data = new URLSearchParams();
+
+    data.append('name', task.name);
+    data.append('project_id', project.id);
+    data.append('description', task.description ? task.description : '');
+    data.append('assigned_id', task.assigned ? task.assigned.id : null);
+    data.append('priority', task.priority ? task.priority : 0 );
+
+    return Observable
+      .fromPromise(this.buildOptions(null))
+      .switchMap((options) => this.http.put(this.propertiesURL + '/' + task.id, data, options));
+  }
+
   getTasksByAssigned(id){
     let params = new URLSearchParams();
     params.set('assigned__id', id);

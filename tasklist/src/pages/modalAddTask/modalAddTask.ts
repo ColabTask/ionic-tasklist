@@ -41,6 +41,12 @@ export class ModalAddTask {
       this.populateListUser();
     }
 
+    const task = params.get('task');
+    if(task) {
+      this.task = task;
+      this.populateTask();
+    }
+
     // Get list of project to populate select
     this.projectService.listProjects().subscribe(
       response => {
@@ -83,13 +89,23 @@ export class ModalAddTask {
     );
   }
 
+  populateTask() {
+    // Populate the interface with the task information
+  }
+
   dismiss() {
     this.viewCtrl.dismiss();
   }
 
   createForm() {
-    console.log(this.task);
-    this.taskService.createTask(this.task, this.project).subscribe(
+    let handler;
+    if( this.task.id ) {
+      handler = this.editTask(this.task, this.project);
+    } else {
+      handler = this.createTask(this.task, this.project);
+    }
+
+    handler.subscribe(
       response => {
         console.log(response.json());
         this.viewCtrl.dismiss();
@@ -97,7 +113,19 @@ export class ModalAddTask {
       err => {
         console.log(err.json());
       },
-      () => console.log('Task Creation Complete')
+      () => console.log('Task ' + this.task.id ? 'Edition' : 'Creation' + ' Complete')
     );
+  }
+
+  createTask(task, project) {
+    return this.taskService.createTask(task, project);
+  }
+
+  editTask(task, project) {
+    return this.taskService.editTask(task, project);
+  }
+
+  deleteTask() {
+
   }
 }
