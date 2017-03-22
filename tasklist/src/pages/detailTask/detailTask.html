@@ -17,7 +17,10 @@
 <ion-content>
   <ion-card>
     <ion-card-content>
-      <ion-card-title>
+      <ion-card-title *ngIf="task.done" color="danger">
+        {{ task.name }}
+      </ion-card-title>
+      <ion-card-title *ngIf="!task.done">
         {{ task.name }}
       </ion-card-title>
       <p *ngIf="task.description">
@@ -59,4 +62,14 @@
       </ion-item>
     </ion-list>
   </ion-card>
+
+  <button *ngIf="task.done" ion-button color="primary" full icon-right (click)="openTask()">
+    Open
+    <ion-icon name="checkmark"></ion-icon>
+  </button>
+  <button *ngIf="!task.done" ion-button color="danger" full icon-right (click)="closeTask()">
+    Close
+    <ion-icon name="checkmark"></ion-icon>
+  </button>
+
 </ion-content>
