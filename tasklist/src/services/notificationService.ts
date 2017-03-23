@@ -12,12 +12,7 @@ export class NotificationService {
 
   constructor(public storage: Storage, protected http:Http, private _config:Config) {
     this.serverURL = _config.get('apiUrl');
-    storage.get('user_id').then(
-      (user_id) => {
-        this.propertiesURL = this.serverURL + '/notification';
-      }
-    );
-
+    this.propertiesURL = this.serverURL + '/notification';
   }
 
   buildOptions(params){
