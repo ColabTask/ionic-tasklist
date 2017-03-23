@@ -45,7 +45,8 @@ export class Login {
         // Redirect after control
         this.storage.set('username', this.username);
         this.storage.set('password', this.password);
-        this.storage.set('token', data.token)
+        this.storage.set('token', data.token);
+        this.storage.set('user_id', data.user_id);
         this.navCtrl.setRoot(ListProject, { });
       },
       err => {

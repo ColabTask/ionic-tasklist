@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { Home } from '../pages/home/home';
 import { ListProject } from '../pages/listProject/listProject';
 import { ListTask, PopOverPage } from '../pages/listTask/listTask';
+import { ListNotification } from '../pages/listNotification/listNotification';
 import { ModalAddProject } from '../pages/modalAddProject/modalAddProject';
 import { ModalAddTask } from '../pages/modalAddTask/modalAddTask';
 import { Login } from '../pages/login/login';
@@ -23,7 +24,8 @@ import { Config } from '../config/config';
     DetailTask,
     ModalAddTask,
     PopOverPage,
-	MyTask
+	  MyTask,
+    ListNotification
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -41,7 +43,8 @@ import { Config } from '../config/config';
     DetailTask,
     ModalAddTask,
     PopOverPage,
-	MyTask
+	  MyTask,
+    ListNotification
   ],
   providers: [
     {
