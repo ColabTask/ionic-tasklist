@@ -58,8 +58,25 @@ export class DetailTask {
   }
 
   editTapped(event) {
-    let modal = this.modalCtrl.create(ModalAddTask, { task: this.task, project: this.task.project||{} });
+	// Create a copy of the related attribute
+	const taskCpy = {};
+	const projectCpy = {};
+	for(let name in this.task) {
+		if(this.task.hasOwnProperty(name)) {
+			taskCpy[name] = this.task[name];
+		}
+	}
+	taskCpy['project'] = {};
+    for(let name in this.task.project) {
+        if(this.task.project.hasOwnProperty(name)) {
+      	  projectCpy[name] = this.task.project[name];
+        }
+    }
+	let modal = this.modalCtrl.create(ModalAddTask, { task: taskCpy, project: projectCpy });
     modal.present();
+    modal.onDidDismiss(() => {
+      this.getDataFromApi();
+    });
   }
 
   closeTask() {
