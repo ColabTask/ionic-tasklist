@@ -14,7 +14,7 @@ export class NotificationService {
     this.serverURL = _config.get('apiUrl');
     storage.get('user_id').then(
       (user_id) => {
-        this.propertiesURL = this.serverURL + '/users/' + user_id + '/notification';
+        this.propertiesURL = this.serverURL + '/notification';
       }
     );
 
