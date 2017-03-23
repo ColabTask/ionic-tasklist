@@ -27,11 +27,6 @@ export class DetailTaskPopover {
     this.project = this.task.project||{};
   }
 
-  editTapped(event, item) {
-    let modal = this.modalCtrl.create(ModalAddTask, { task: this.task, project: this.project });
-    //modal.onDidDismiss(() => {});
-    modal.present();
-  }
 }
 
 @Component({
@@ -59,6 +54,11 @@ export class DetailTask {
     popover.present({
       ev: event
     });
+  }
+
+  editTapped(event) {
+    let modal = this.modalCtrl.create(ModalAddTask, { task: this.task, project: this.task.project||{} });
+    modal.present();
   }
 
 }

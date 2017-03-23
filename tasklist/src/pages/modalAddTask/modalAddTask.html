@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar color="main">
-    <ion-title>
-      New task
-    </ion-title>
+    <ion-title *ngIf="task.id">Edit task</ion-title>
+    <ion-title *ngIf="!task.id">New task</ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <span ion-text color="primary" showWhen="ios">Cancel</span>

@@ -99,7 +99,7 @@ export class ModalAddTask {
 
   createForm() {
     let handler;
-    if( this.task.id ) {
+    if( this.task['id'] != undefined ) {
       handler = this.editTask(this.task, this.project);
     } else {
       handler = this.createTask(this.task, this.project);
@@ -113,7 +113,7 @@ export class ModalAddTask {
       err => {
         console.log(err.json());
       },
-      () => console.log('Task ' + this.task.id ? 'Edition' : 'Creation' + ' Complete')
+      () => console.log('Task ' + this.task['id'] ? 'Edition' : 'Creation' + ' Complete')
     );
   }
 
