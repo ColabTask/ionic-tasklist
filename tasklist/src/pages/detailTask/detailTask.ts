@@ -42,7 +42,8 @@ export class DetailTask {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
-    public popoverCtrl: PopoverController
+    public popoverCtrl: PopoverController,
+    private taskService: TaskService
   )
   {
     this.task = navParams.get("task");
@@ -59,6 +60,54 @@ export class DetailTask {
   editTapped(event) {
     let modal = this.modalCtrl.create(ModalAddTask, { task: this.task, project: this.task.project||{} });
     modal.present();
+  }
+
+  closeTask() {
+    this.taskService.closeTask(this.task.id).subscribe(
+      response => {
+        let toast = this.toastCtrl.create({
+          message: this.task.name + ' has been closed',
+          duration: 3000
+        });
+        toast.present();
+        this.getDataFromApi();
+      },
+      err => {
+        let toast = this.toastCtrl.create({
+          message: 'Error : Connection server',
+          dismissOnPageChange: true
+        });
+        toast.present();
+      }
+    );
+  }
+
+  openTask() {
+    this.taskService.openTask(this.task.id).subscribe(
+      response => {
+        let toast = this.toastCtrl.create({
+          message: this.task.name + ' has been opened',
+          duration: 3000
+        });
+        toast.present();
+        this.getDataFromApi();
+      },
+      err => {
+        let toast = this.toastCtrl.create({
+          message: 'Error : Connection server',
+          dismissOnPageChange: true
+        });
+        toast.present();
+      }
+    );
+  }
+
+  getDataFromApi() {
+    this.taskService.getTask(this.task.id).subscribe(
+      response => {
+        this.task = response.json()
+      }
+    );
   }
 
 }

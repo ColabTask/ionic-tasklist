@@ -21,14 +21,24 @@
   <ion-list inset>
     <ion-item-sliding *ngFor="let item of items">
       <ion-item (click)="itemTapped($event, item)">
-        <h3>{{item.name}}</h3>
+        <h3 *ngIf="item.done" color="danger">
+          <ion-icon name="checkmark" color="danger"></ion-icon>
+          {{item.name}}
+        </h3>
+        <h3 *ngIf="!item.done">
+          {{item.name}}
+        </h3>
         <p>{{item.description}}</p>
       </ion-item>
 
       <ion-item-options side="right">
-        <button ion-button color="danger">
-          <ion-icon name="trash"></ion-icon>
-          Delete
+        <button *ngIf="item.done" ion-button (click)="openTask(item)">
+          <ion-icon name="checkmark"></ion-icon>
+          Open
+        </button>
+        <button *ngIf="!item.done" ion-button color="danger" (click)="closeTask(item)">
+          <ion-icon name="checkmark"></ion-icon>
+          Close
         </button>
       </ion-item-options>
     </ion-item-sliding>

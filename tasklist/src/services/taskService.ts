@@ -79,6 +79,12 @@ export class TaskService {
       .switchMap((options) => this.http.put(this.propertiesURL + '/' + task.id, data, options));
   }
 
+  getTask(id) {
+    return Observable
+      .fromPromise(this.buildOptions(null))
+      .switchMap((options) => this.http.get(this.propertiesURL + "/" + id, options));
+  }
+
   getTasksByAssigned(id){
     let params = new URLSearchParams();
     params.set('assigned__id', id);
@@ -104,5 +110,23 @@ export class TaskService {
     return Observable
         .fromPromise(this.buildOptions(params))
         .switchMap((options) => this.http.get(this.propertiesURL, options));
+  }
+
+  closeTask(id) {
+    let data = new URLSearchParams();
+    data.append('done', "True");
+
+    return Observable
+        .fromPromise(this.buildOptions(null))
+        .switchMap((options) => this.http.patch(this.propertiesURL + "/" + id, data, options));
+  }
+
+  openTask(id) {
+    let data = new URLSearchParams();
+    data.append('done', "False");
+
+    return Observable
+        .fromPromise(this.buildOptions(null))
+        .switchMap((options) => this.http.patch(this.propertiesURL + "/" + id, data, options));
   }
 }
