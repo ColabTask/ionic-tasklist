@@ -7,6 +7,7 @@ import {ProjectService} from '../../services/projectService';
 import {Access} from '../../models/accessModel';
 import {User} from '../../models/userModel';
 import {Project} from '../../models/projectModel';
+import {Task} from '../../models/taskModel';
 
 @Component({
   templateUrl: 'modalAddTask.html',
@@ -18,7 +19,7 @@ import {Project} from '../../models/projectModel';
 })
 
 export class ModalAddTask {
-  task = {};
+  task:Task;
   accessList: Array<Access>;
   project: Project;
   users: Array<User>;
@@ -43,8 +44,10 @@ export class ModalAddTask {
 
     const task = params.get('task');
     if(task) {
-      this.task = task;
+      this.task = new Task(task);
       this.populateTask();
+    } else {
+      this.task = new Task();
     }
 
     // Get list of project to populate select
@@ -118,6 +121,7 @@ export class ModalAddTask {
   }
 
   createTask(task, project) {
+    console.log(task, project);
     return this.taskService.createTask(task, project);
   }
 

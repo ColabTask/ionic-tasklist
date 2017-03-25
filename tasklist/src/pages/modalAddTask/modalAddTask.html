@@ -44,10 +44,7 @@
 
     <ion-item>
       <ion-label stacked>Assigned to</ion-label>
-      <ion-select *ngIf="task.assigned" [(ngModel)]="task.assigned.id" name="assigned">
-        <ion-option *ngFor="let user of users" value="{{user.id}}">{{user.username}}</ion-option>
-      </ion-select>
-      <ion-select *ngIf="!task.assigned" [(ngModel)]="task.assigned" name="assigned">
+      <ion-select [(ngModel)]="task.assigned.id" name="assigned">
         <ion-option *ngFor="let user of users" value="{{user.id}}">{{user.username}}</ion-option>
       </ion-select>
     </ion-item>

@@ -5,7 +5,8 @@ import { PopoverController, ModalController, NavController, NavParams, ToastCont
 import { DetailTask } from '../detailTask/detailTask';
 import { ModalAddTask } from '../modalAddTask/modalAddTask';
 import {TaskService} from '../../services/taskService';
-
+import {Task} from '../../models/taskModel';
+import {Project} from '../../models/projectModel';
 
 @Component({
   template: `
@@ -33,8 +34,8 @@ export class PopOverPage {
   providers: [TaskService]
 })
 export class MyTask {
-  items: Array<any>;
-  project: any;
+  items: Array<Task>;
+  project: Project;
 
   constructor(
     public navCtrl: NavController,
@@ -44,10 +45,10 @@ export class MyTask {
     private taskService: TaskService,
     public toastCtrl: ToastController
   ) {
-    this.project = navParams.get("project");
+    this.project = new Project(navParams.get("project"));
     this.taskService.getTasksByAssigned(1).subscribe(
       response => {
-        this.items = response.json()
+        this.items = response.json().map(t => new Task(t));
       },
       err => {
         let toast = this.toastCtrl.create({

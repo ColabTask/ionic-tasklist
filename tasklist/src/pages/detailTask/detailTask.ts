@@ -4,6 +4,8 @@ import { ModalController, NavController, NavParams, ToastController, PopoverCont
 
 import { TaskService } from '../../services/taskService';
 import { ModalAddTask } from '../modalAddTask/modalAddTask';
+import { Task } from '../../models/taskModel';
+import { Project } from '../../models/projectModel';
 
 @Component({
   template: `
@@ -23,8 +25,8 @@ export class DetailTaskPopover {
     private navParams: NavParams,
     public modalCtrl: ModalController
   ) {
-    this.task = navParams.get("task");
-    this.project = this.task.project||{};
+    this.task = new Task(navParams.get("task"));
+    this.project = new Project(this.task.project||{});
   }
 
 }
@@ -35,7 +37,7 @@ export class DetailTaskPopover {
   providers: [TaskService]
 })
 export class DetailTask {
-  task: any;
+  task: Task;
 
   constructor(
     public navCtrl: NavController,
@@ -46,7 +48,7 @@ export class DetailTask {
     private taskService: TaskService
   )
   {
-    this.task = navParams.get("task");
+    this.task = new Task(navParams.get("task"));
     console.log(this.task);
   }
 
@@ -59,19 +61,9 @@ export class DetailTask {
 
   editTapped(event) {
 	// Create a copy of the related attribute
-	const taskCpy = {};
-	const projectCpy = {};
-	for(let name in this.task) {
-		if(this.task.hasOwnProperty(name)) {
-			taskCpy[name] = this.task[name];
-		}
-	}
-	taskCpy['project'] = {};
-    for(let name in this.task.project) {
-        if(this.task.project.hasOwnProperty(name)) {
-      	  projectCpy[name] = this.task.project[name];
-        }
-    }
+	const taskCpy = new Task(this.task.props());
+	const projectCpy = new Project(this.task.project.props());
+  taskCpy.project = projectCpy;
 	let modal = this.modalCtrl.create(ModalAddTask, { task: taskCpy, project: projectCpy });
     modal.present();
     modal.onDidDismiss(() => {
@@ -122,7 +114,7 @@ export class DetailTask {
   getDataFromApi() {
     this.taskService.getTask(this.task.id).subscribe(
       response => {
-        this.task = response.json()
+        this.task = new Task(response.json());
       }
     );
   }

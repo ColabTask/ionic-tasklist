@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { Platform, ViewController, NavParams } from 'ionic-angular';
 import {ProjectService} from '../../services/projectService';
+import {Project} from '../../models/projectModel';
 
 @Component({
   templateUrl: 'modalAddProject.html',
@@ -9,14 +10,16 @@ import {ProjectService} from '../../services/projectService';
 })
 
 export class ModalAddProject {
-  project = {}
+  project:Project;
 
   constructor(
     public platform: Platform,
     public params: NavParams,
     public viewCtrl: ViewController,
     private projectService: ProjectService
-  ) {  }
+  ) {
+    this.project = new Project();
+  }
 
   dismiss() {
     this.viewCtrl.dismiss();
