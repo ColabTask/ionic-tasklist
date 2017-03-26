@@ -61,8 +61,8 @@ export class DetailTask {
 
   editTapped(event) {
 	// Create a copy of the related attribute
-	const taskCpy = new Task(this.task.props());
-	const projectCpy = new Project(this.task.project.props());
+	const taskCpy = new Task(this.task.getProperties());
+	const projectCpy = new Project(this.task.project.getProperties());
   taskCpy.project = projectCpy;
 	let modal = this.modalCtrl.create(ModalAddTask, { task: taskCpy, project: projectCpy });
     modal.present();

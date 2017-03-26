@@ -12,7 +12,7 @@ export default class BaseModel {
     }
   }
 
-  props() {
+  getProperties() {
     const props = {};
     for(var name in this) {
       if( this.hasOwnProperty(name) ) {
