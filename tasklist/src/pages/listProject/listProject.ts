@@ -5,6 +5,7 @@ import { ModalController, NavController, NavParams, ToastController } from 'ioni
 import { ListTask } from '../listTask/listTask';
 import { ModalAddProject } from '../modalAddProject/modalAddProject';
 import {ProjectService} from '../../services/projectService';
+import { Project } from '../../models/projectModel';
 
 @Component({
   selector: 'list-project',
@@ -13,7 +14,7 @@ import {ProjectService} from '../../services/projectService';
 })
 
 export class ListProject {
-  items: Array<any>;
+  items: Array<Project>;
 
   constructor(
     public navCtrl: NavController,
@@ -67,7 +68,7 @@ export class ListProject {
   getDataFromApi() {
     this.projectService.listProjects().subscribe(
       response => {
-        this.items = response.json()
+        this.items = response.json().map(p => new Project(p) );
       },
       err => {
         let toast = this.toastCtrl.create({

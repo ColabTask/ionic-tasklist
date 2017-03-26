@@ -7,7 +7,7 @@ import { ListTask, PopOverPage } from '../pages/listTask/listTask';
 import { ModalAddProject } from '../pages/modalAddProject/modalAddProject';
 import { ModalAddTask } from '../pages/modalAddTask/modalAddTask';
 import { Login } from '../pages/login/login';
-import { DetailTask } from '../pages/detailTask/detailTask';
+import { DetailTask, DetailTaskPopover } from '../pages/detailTask/detailTask';
 import { MyTask } from '../pages/myTask/myTask';
 import { Storage } from '@ionic/storage';
 import { Config } from '../config/config';
@@ -23,7 +23,8 @@ import { Config } from '../config/config';
     DetailTask,
     ModalAddTask,
     PopOverPage,
-	MyTask
+	  MyTask,
+    DetailTaskPopover
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -41,7 +42,8 @@ import { Config } from '../config/config';
     DetailTask,
     ModalAddTask,
     PopOverPage,
-	MyTask
+	  MyTask,
+    DetailTaskPopover
   ],
   providers: [
     {

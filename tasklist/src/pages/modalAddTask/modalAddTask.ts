@@ -7,6 +7,7 @@ import {ProjectService} from '../../services/projectService';
 import {Access} from '../../models/accessModel';
 import {User} from '../../models/userModel';
 import {Project} from '../../models/projectModel';
+import {Task} from '../../models/taskModel';
 
 @Component({
   templateUrl: 'modalAddTask.html',
@@ -18,7 +19,7 @@ import {Project} from '../../models/projectModel';
 })
 
 export class ModalAddTask {
-  task = {};
+  task:Task;
   accessList: Array<Access>;
   project: Project;
   users: Array<User>;
@@ -39,6 +40,14 @@ export class ModalAddTask {
     {
       // We populate the list of user
       this.populateListUser();
+    }
+
+    const task = params.get('task');
+    if(task) {
+      this.task = new Task(task);
+      this.populateTask();
+    } else {
+      this.task = new Task();
     }
 
     // Get list of project to populate select
@@ -83,13 +92,23 @@ export class ModalAddTask {
     );
   }
 
+  populateTask() {
+    // Populate the interface with the task information
+  }
+
   dismiss() {
     this.viewCtrl.dismiss();
   }
 
   createForm() {
-    console.log(this.task);
-    this.taskService.createTask(this.task, this.project).subscribe(
+    let handler;
+    if( this.task['id'] != undefined ) {
+      handler = this.editTask(this.task, this.project);
+    } else {
+      handler = this.createTask(this.task, this.project);
+    }
+
+    handler.subscribe(
       response => {
         console.log(response.json());
         this.viewCtrl.dismiss();
@@ -97,7 +116,20 @@ export class ModalAddTask {
       err => {
         console.log(err.json());
       },
-      () => console.log('Task Creation Complete')
+      () => console.log('Task ' + this.task['id'] ? 'Edition' : 'Creation' + ' Complete')
     );
+  }
+
+  createTask(task, project) {
+    console.log(task, project);
+    return this.taskService.createTask(task, project);
+  }
+
+  editTask(task, project) {
+    return this.taskService.editTask(task, project);
+  }
+
+  deleteTask() {
+
   }
 }

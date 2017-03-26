@@ -4,6 +4,8 @@ import {Injectable} from "@angular/core";
 import { Observable } from 'rxjs/Rx';
 import { Storage } from '@ionic/storage';
 import { Config } from '../config/config';
+import { Task } from '../models/taskModel';
+import { Project } from '../models/projectModel';
 
 
 @Injectable()
@@ -41,22 +43,22 @@ export class TaskService {
         .switchMap((options) => this.http.get(this.propertiesURL, options));
   }
 
-  createTask(task, project) {
+  createTask(task:Task, project:Project) {
     console.log("==> Create task");
     let data = new URLSearchParams();
     data.append('name', task.name);
-    data.append('project_id', project.id);
+    data.append('project_id', project.id.toString());
 
     if(task.description){
       data.append('description', task.description);
     }
 
-    if(task.assigned){
-      data.append('assigned_id', task.assigned);
+    if(task.assigned.id){
+      data.append('assigned_id', task.assigned.id.toString());
     }
 
     if(task.priority){
-      data.append('priority', task.priority);
+      data.append('priority', task.priority.toString());
     }
 
     return Observable
@@ -64,10 +66,25 @@ export class TaskService {
         .switchMap((options) => this.http.post(this.propertiesURL, data, options));
   }
 
-  getTask(id){
+  editTask(task:Task, project:Project) {
+    console.log("==> Edit task");
+    let data = new URLSearchParams();
+
+    data.append('name', task.name);
+    data.append('project_id', project.id.toString());
+    data.append('description', task.description);
+    data.append('assigned_id', task.assigned.id ? task.assigned.id.toString() : null );
+    data.append('priority', task.priority ? task.priority.toString() : '0' );
+
     return Observable
-        .fromPromise(this.buildOptions(null))
-        .switchMap((options) => this.http.get(this.propertiesURL + "/" + id, options));
+      .fromPromise(this.buildOptions(null))
+      .switchMap((options) => this.http.put(this.propertiesURL + '/' + task.id, data, options));
+  }
+
+  getTask(id) {
+    return Observable
+      .fromPromise(this.buildOptions(null))
+      .switchMap((options) => this.http.get(this.propertiesURL + "/" + id, options));
   }
 
   getTasksByAssigned(id){
