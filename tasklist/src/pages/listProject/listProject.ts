@@ -67,7 +67,8 @@ export class ListProject {
   }
 
   openEditModal(item) {
-    let modal = this.modalCtrl.create(ModalEditProject, {paramProject : item});
+    const projectCpy = new Project(item);
+    let modal = this.modalCtrl.create(ModalEditProject, { project: projectCpy });
     modal.onDidDismiss(() => {
       this.getDataFromApi();
     });

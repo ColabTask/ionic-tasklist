@@ -19,7 +19,7 @@ export class ModalEditProject {
     public viewCtrl: ViewController,
     private projectService: ProjectService
   ) {
-    this.project = params.get('paramProject');
+    this.project = params.get('project');
   }
 
   setProject(item){
