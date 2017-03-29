@@ -18,6 +18,38 @@
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-searchbar [(ngModel)]="searchName" (ionInput)="getDataFromApi()"></ion-searchbar>
+  </ion-item>
+  <ion-item>
+    <ion-label>Id</ion-label>
+    <ion-input [(ngModel)]="searchId" (input)="getDataFromApi()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Status</ion-label>
+    <ion-select [(ngModel)]="searchDone" (ionChange)="getDataFromApi()">
+      <ion-option value="all" selected="true">All</ion-option>
+      <ion-option value="done">Done</ion-option>
+      <ion-option value="notDone">Not done</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Priority</ion-label>
+    <ion-select [(ngModel)]="searchPriority" (ionChange)="getDataFromApi()">
+      <ion-option value="all" selected="true">All</ion-option>
+      <ion-option value="0">0</ion-option>
+      <ion-option value="1">1</ion-option>
+      <ion-option value="2">2</ion-option>
+      <ion-option value="3">3</ion-option>
+      <ion-option value="4">4</ion-option>
+      <ion-option value="5">5</ion-option>
+      <ion-option value="6">6</ion-option>
+      <ion-option value="7">7</ion-option>
+      <ion-option value="8">8</ion-option>
+      <ion-option value="9">9</ion-option>
+      <ion-option value="10">10</ion-option>
+    </ion-select>
+  </ion-item>
   <ion-list inset>
     <ion-item-sliding *ngFor="let item of items">
       <ion-item (click)="itemTapped($event, item)">

@@ -15,6 +15,8 @@ import { Project } from '../../models/projectModel';
 
 export class ListProject {
   items: Array<Project>;
+  searchTerm: string = '';
+  searchId: string = '';
 
   constructor(
     public navCtrl: NavController,
@@ -68,7 +70,16 @@ export class ListProject {
   getDataFromApi() {
     this.projectService.listProjects().subscribe(
       response => {
-        this.items = response.json().map(p => new Project(p) );
+        this.items = response.json().map(p => new Project(p) ).filter((item) => {
+          if (this.searchId != "")
+          {
+            if(item.id != this.searchId)
+            {
+              return false;
+            }
+          }
+          return item.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+        });;
       },
       err => {
         let toast = this.toastCtrl.create({
