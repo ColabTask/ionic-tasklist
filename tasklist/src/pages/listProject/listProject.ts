@@ -4,7 +4,6 @@ import { ModalController, NavController, NavParams, ToastController } from 'ioni
 
 import { ListTask } from '../listTask/listTask';
 import { ModalAddProject } from '../modalAddProject/modalAddProject';
-import { ModalEditProject } from '../modalEditProject/modalEditProject';
 import {ProjectService} from '../../services/projectService';
 import { Project } from '../../models/projectModel';
 
@@ -64,15 +63,6 @@ export class ListProject {
 
   openModal() {
     let modal = this.modalCtrl.create(ModalAddProject);
-    modal.onDidDismiss(() => {
-      this.getDataFromApi();
-    });
-    modal.present();
-  }
-
-  openEditModal(item) {
-    const projectCpy = new Project(item);
-    let modal = this.modalCtrl.create(ModalEditProject, { project: projectCpy });
     modal.onDidDismiss(() => {
       this.getDataFromApi();
     });
