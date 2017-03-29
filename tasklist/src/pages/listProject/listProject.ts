@@ -28,6 +28,10 @@ export class ListProject {
     this.getDataFromApi();
   }
 
+  ionViewWillEnter() {
+    this.getDataFromApi();
+  }
+
   itemTapped(event, item) {
     this.navCtrl.push(ListTask, {
       project: item
