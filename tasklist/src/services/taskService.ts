@@ -60,7 +60,13 @@ export class TaskService {
     if(task.priority){
       data.append('priority', task.priority.toString());
     }
-
+	
+	if(task.labels.length > 0){
+        for(let label of task.labels) {
+            data.append('labels', label.toString());
+		}
+	}
+    
     return Observable
         .fromPromise(this.buildOptions(null))
         .switchMap((options) => this.http.post(this.propertiesURL, data, options));
@@ -75,6 +81,11 @@ export class TaskService {
     data.append('description', task.description);
     data.append('assigned_id', task.assigned.id ? task.assigned.id.toString() : null );
     data.append('priority', task.priority ? task.priority.toString() : '0' );
+	if(task.labels.length > 0){
+		for(let label of task.labels) {
+            data.append('labels', label.toString());
+		}
+	}
 
     return Observable
       .fromPromise(this.buildOptions(null))

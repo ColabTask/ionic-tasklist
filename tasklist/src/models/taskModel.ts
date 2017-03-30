@@ -1,10 +1,12 @@
 import { User } from './userModel';
 import { Project } from './projectModel';
+import { Label } from './labelModel';
 import BaseModel from "./baseModel";
 
 export class Task extends BaseModel {
   id:number;
   name:string;
+  labels:Array<Label>;
   description:string;
   priority:number;
   done:boolean;
@@ -18,6 +20,7 @@ export class Task extends BaseModel {
     super({
       id: data['id']||null,
       name: data['name']||'',
+	  labels: data['labels']||[],
       description: data['description']||'',
       priority: data['priority']||0,
       done: data['done']||false,
@@ -28,5 +31,4 @@ export class Task extends BaseModel {
       project: new Project(data['project']||{})
     });
   }
-
 }
