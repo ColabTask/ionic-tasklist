@@ -15,11 +15,18 @@
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="getDataFromApi()"></ion-searchbar>
+  </ion-item>
+  <ion-item>
+    <ion-label>Id</ion-label>
+    <ion-input [(ngModel)]="searchId" (input)="getDataFromApi()"></ion-input>
+  </ion-item>
   <ion-list inset>
 
     <ion-item-sliding *ngFor="let item of items">
       <ion-item (click)="itemTapped($event, item)">
-        {{item.name}}
+        #{{item.id}} {{item.name}}
       </ion-item>
 
       <ion-item-options side="right">

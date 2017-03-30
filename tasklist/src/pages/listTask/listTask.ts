@@ -27,7 +27,6 @@ import {Project} from '../../models/projectModel';
 })
 export class PopOverPage {
   constructor(private navParams: NavParams) { }
-
 }
 
 
@@ -39,6 +38,13 @@ export class PopOverPage {
 export class ListTask {
   items: Array<Task>;
   project: Project;
+  searchId: string = '';
+  searchName: string = '';
+  searchDone: string = 'all';
+  searchPriority: string = 'all';
+  searchAssigned: string = '';
+  showFilter: boolean = false;
+  isPriorityFiltered: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -65,7 +71,43 @@ export class ListTask {
     );
     this.taskService.getTasksByProject(this.project.id).subscribe(
       response => {
-        this.items = response.json().map(t => new Task(t));
+        this.items = response.json().map(t => new Task(t)).filter((item) => {
+          if (this.searchPriority != "all") {
+            if (item.priority != this.searchPriority) {
+              return false;
+            }
+          }
+          if (this.searchDone == "done" && item.done != true) {
+            return false;
+          }
+          else if (this.searchDone == "notDone" && item.done != false) {
+            return false;
+          }
+          if (this.searchId != "")
+          {
+            if(item.id != this.searchId)
+            {
+              return false;
+            }
+          }
+          if (this.searchAssigned != "")
+          {
+            console.log(typeof item.assigned);
+            console.log(typeof item.assigned.username);
+            if("undefined" != typeof item.assigned.username)
+            {
+              if(item.assigned.username.toLowerCase().indexOf(this.searchAssigned.toLowerCase()) == -1)
+              {
+                return false;
+              }
+            }
+            else
+            {
+              return false;
+            }
+          }
+          return item.name.toLowerCase().indexOf(this.searchName.toLowerCase()) > -1;
+        });
       },
       err => {
         let toast = this.toastCtrl.create({
