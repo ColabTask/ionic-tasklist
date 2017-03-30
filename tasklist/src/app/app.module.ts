@@ -5,7 +5,6 @@ import { Home } from '../pages/home/home';
 import { ListProject } from '../pages/listProject/listProject';
 import { ListTask, PopOverPage } from '../pages/listTask/listTask';
 import { ModalAddProject } from '../pages/modalAddProject/modalAddProject';
-import { ModalEditProject } from '../pages/modalEditProject/modalEditProject';
 import { ModalAddTask } from '../pages/modalAddTask/modalAddTask';
 import { Login } from '../pages/login/login';
 import { DetailTask, DetailTaskPopover } from '../pages/detailTask/detailTask';
@@ -20,7 +19,6 @@ import { Config } from '../config/config';
     ListProject,
     ListTask,
     ModalAddProject,
-    ModalEditProject,
     Login,
     DetailTask,
     ModalAddTask,
@@ -40,7 +38,6 @@ import { Config } from '../config/config';
     ListProject,
     ListTask,
     ModalAddProject,
-    ModalEditProject,
     Login,
     DetailTask,
     ModalAddTask,

@@ -4,7 +4,7 @@ import { PopoverController, ModalController, NavController, NavParams, ToastCont
 
 import { DetailTask } from '../detailTask/detailTask';
 import { ModalAddTask } from '../modalAddTask/modalAddTask';
-import { ModalEditProject } from '../modalEditProject/modalEditProject';
+import { ModalAddProject } from '../modalAddProject/modalAddProject';
 import {TaskService} from '../../services/taskService';
 import {ProjectService} from '../../services/projectService';
 import {Task} from '../../models/taskModel';
@@ -80,7 +80,7 @@ export class ListTask {
   editTapped(event) {
     // Create a copy of the related attribute
     const projectCpy = new Project(this.project.getProperties());
-    let modal = this.modalCtrl.create(ModalEditProject, { project: projectCpy });
+    let modal = this.modalCtrl.create(ModalAddProject, { project: projectCpy });
     modal.present();
     modal.onDidDismiss(() => {
       this.getDataFromApi();

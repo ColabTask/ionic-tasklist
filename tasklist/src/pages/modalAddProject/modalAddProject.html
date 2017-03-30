@@ -18,6 +18,7 @@
       <ion-label floating>Name</ion-label>
       <ion-input type="text" [(ngModel)]="project.name" name="name"></ion-input>
     </ion-item>
-    <button ion-button type="submit" block>Add Project</button>
+    <button *ngIf="project.id" ion-button type="submit" block>Edit Project</button>
+    <button *ngIf="!project.id" ion-button type="submit" block>Add Project</button>
   </form>
 </ion-content>
