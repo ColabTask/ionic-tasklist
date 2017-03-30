@@ -25,7 +25,6 @@ import {Project} from '../../models/projectModel';
 })
 export class PopOverPage {
   constructor(private navParams: NavParams) { }
-
 }
 
 
@@ -85,7 +84,16 @@ export class ListTask {
           }
           if (this.searchAssigned != "")
           {
-            if(item.assigned.username.toLowerCase().indexOf(this.searchAssigned.toLowerCase()) == -1)
+            console.log(typeof item.assigned);
+            console.log(typeof item.assigned.username);
+            if("undefined" != typeof item.assigned.username)
+            {
+              if(item.assigned.username.toLowerCase().indexOf(this.searchAssigned.toLowerCase()) == -1)
+              {
+                return false;
+              }
+            }
+            else
             {
               return false;
             }

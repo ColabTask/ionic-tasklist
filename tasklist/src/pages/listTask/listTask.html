@@ -60,13 +60,12 @@
   <ion-list inset>
     <ion-item-sliding *ngFor="let item of items">
       <ion-item (click)="itemTapped($event, item)">
-        <h4>Id: {{item.id}}</h4>
         <h3 *ngIf="item.done" color="danger">
           <ion-icon name="checkmark" color="danger"></ion-icon>
-          {{item.name}}
+          #{{item.id}} {{item.name}}
         </h3>
         <h3 *ngIf="!item.done">
-          {{item.name}}
+          #{{item.id}} {{item.name}}
         </h3>
         <p>{{item.description}}</p>
       </ion-item>
