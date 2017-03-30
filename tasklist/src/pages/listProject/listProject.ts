@@ -27,6 +27,10 @@ export class ListProject {
     this.getDataFromApi();
   }
 
+  ionViewWillEnter() {
+    this.getDataFromApi();
+  }
+
   itemTapped(event, item) {
     this.navCtrl.push(ListTask, {
       project: item
@@ -34,7 +38,7 @@ export class ListProject {
   }
 
   deleteProject(item) {
-    let title = item.title;
+    let title = item.name;
 
     this.projectService.deleteProject(item.id).subscribe(
       response => {

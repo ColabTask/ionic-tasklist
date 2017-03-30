@@ -18,7 +18,12 @@ export class ModalAddProject {
     public viewCtrl: ViewController,
     private projectService: ProjectService
   ) {
-    this.project = new Project();
+    const project = params.get('project');
+    if(project) {
+      this.project = new Project(project);
+    } else {
+      this.project = new Project();
+    }
   }
 
   dismiss() {
@@ -26,16 +31,31 @@ export class ModalAddProject {
   }
 
   createForm() {
-    console.log(this.project);
-    this.projectService.createProject(this.project).subscribe(
+    let handler;
+    if( this.project['id'] != undefined ) {
+      handler = this.editProject(this.project);
+    } else {
+      handler = this.createProject(this.project);
+    }
+
+    handler.subscribe(
       response => {
-        console.log(response);
+        console.log(response.json());
         this.viewCtrl.dismiss();
       },
       err => {
-        console.log(err);
+        console.log(err.json());
       },
-      () => console.log('Project Creation Complete')
+      () => console.log('Project ' + this.project['id'] ? 'Edition' : 'Creation' + ' Complete')
     );
+  }
+
+  createProject(project) {
+    console.log(project);
+    return this.projectService.createProject(project);
+  }
+
+  editProject(project) {
+    return this.projectService.editProject(project);
   }
 }

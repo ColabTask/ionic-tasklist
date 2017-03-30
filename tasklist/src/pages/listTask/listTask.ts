@@ -4,7 +4,9 @@ import { PopoverController, ModalController, NavController, NavParams, ToastCont
 
 import { DetailTask } from '../detailTask/detailTask';
 import { ModalAddTask } from '../modalAddTask/modalAddTask';
+import { ModalAddProject } from '../modalAddProject/modalAddProject';
 import {TaskService} from '../../services/taskService';
+import {ProjectService} from '../../services/projectService';
 import {Task} from '../../models/taskModel';
 import {Project} from '../../models/projectModel';
 
@@ -32,7 +34,7 @@ export class PopOverPage {
 @Component({
   selector: 'list-task',
   templateUrl: 'listTask.html',
-  providers: [TaskService]
+  providers: [ProjectService, TaskService]
 })
 export class ListTask {
   items: Array<Task>;
@@ -43,6 +45,7 @@ export class ListTask {
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public popoverCtrl: PopoverController,
+    private projectService: ProjectService,
     private taskService: TaskService,
     public toastCtrl: ToastController
   ) {
@@ -55,6 +58,11 @@ export class ListTask {
   }
 
   getDataFromApi(){
+    this.projectService.getProject(this.project.id).subscribe(
+      response => {
+        this.project = new Project(response.json());
+      }
+    );
     this.taskService.getTasksByProject(this.project.id).subscribe(
       response => {
         this.items = response.json().map(t => new Task(t));
@@ -67,6 +75,16 @@ export class ListTask {
         toast.present();
       }
     );
+  }
+
+  editTapped(event) {
+    // Create a copy of the related attribute
+    const projectCpy = new Project(this.project.getProperties());
+    let modal = this.modalCtrl.create(ModalAddProject, { project: projectCpy });
+    modal.present();
+    modal.onDidDismiss(() => {
+      this.getDataFromApi();
+    });
   }
 
   itemTapped(event, item) {

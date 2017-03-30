@@ -47,12 +47,26 @@ export class ProjectService {
         .switchMap((options) => this.http.get(this.propertiesURL + "/" + id + "/access", options));
   }
 
+  getProject(id){
+    return Observable
+      .fromPromise(this.buildOptions(null))
+      .switchMap((options) => this.http.get(this.propertiesURL + "/" + id, options));
+  }
+
   createProject(project) {
     let data = new URLSearchParams();
     data.append('name', project.name);
     return Observable
         .fromPromise(this.buildOptions(null))
         .switchMap((options) => this.http.post(this.propertiesURL, data, options));
+  }
+
+  editProject(project){
+    let data = new URLSearchParams();
+    data.append('name', project.name);
+    return Observable
+      .fromPromise(this.buildOptions(null))
+      .switchMap((options) => this.http.put(this.propertiesURL + "/" + project.id, data, options));
   }
 
   deleteProject(id) {
