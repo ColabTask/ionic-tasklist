@@ -41,6 +41,8 @@ export class ListTask {
   searchName: string = '';
   searchDone: string = 'all';
   searchPriority: string = 'all';
+  searchAssigned: string = '';
+  showFilter: boolean = false;
   isPriorityFiltered: boolean = false;
 
   constructor(
@@ -77,6 +79,13 @@ export class ListTask {
           if (this.searchId != "")
           {
             if(item.id != this.searchId)
+            {
+              return false;
+            }
+          }
+          if (this.searchAssigned != "")
+          {
+            if(item.assigned.username.toLowerCase().indexOf(this.searchAssigned.toLowerCase()) == -1)
             {
               return false;
             }

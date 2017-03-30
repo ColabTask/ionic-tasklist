@@ -22,18 +22,21 @@
     <ion-searchbar [(ngModel)]="searchName" (ionInput)="getDataFromApi()"></ion-searchbar>
   </ion-item>
   <ion-item>
+    <button ion-button (click)="this.showFilter=!this.showFilter">{{showFilter ? 'Hide' : 'Show'}} filters</button>
+  </ion-item>
+  <ion-item *ngIf="this.showFilter">
     <ion-label>Id</ion-label>
     <ion-input [(ngModel)]="searchId" (input)="getDataFromApi()"></ion-input>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="this.showFilter">
     <ion-label>Status</ion-label>
     <ion-select [(ngModel)]="searchDone" (ionChange)="getDataFromApi()">
       <ion-option value="all" selected="true">All</ion-option>
-      <ion-option value="done">Done</ion-option>
-      <ion-option value="notDone">Not done</ion-option>
+      <ion-option value="done">Open</ion-option>
+      <ion-option value="notDone">Closed</ion-option>
     </ion-select>
   </ion-item>
-  <ion-item>
+  <ion-item *ngIf="this.showFilter">
     <ion-label>Priority</ion-label>
     <ion-select [(ngModel)]="searchPriority" (ionChange)="getDataFromApi()">
       <ion-option value="all" selected="true">All</ion-option>
@@ -50,9 +53,14 @@
       <ion-option value="10">10</ion-option>
     </ion-select>
   </ion-item>
+  <ion-item *ngIf="this.showFilter">
+    <ion-label>Assigned to</ion-label>
+    <ion-input [(ngModel)]="searchAssigned" (input)="getDataFromApi()"></ion-input>
+  </ion-item>
   <ion-list inset>
     <ion-item-sliding *ngFor="let item of items">
       <ion-item (click)="itemTapped($event, item)">
+        <h4>Id: {{item.id}}</h4>
         <h3 *ngIf="item.done" color="danger">
           <ion-icon name="checkmark" color="danger"></ion-icon>
           {{item.name}}

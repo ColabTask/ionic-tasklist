@@ -26,6 +26,7 @@
 
     <ion-item-sliding *ngFor="let item of items">
       <ion-item (click)="itemTapped($event, item)">
+        <h4>Id: {{item.id}}</h4>
         {{item.name}}
       </ion-item>
 
