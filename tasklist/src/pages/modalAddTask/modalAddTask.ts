@@ -8,6 +8,7 @@ import {Access} from '../../models/accessModel';
 import {User} from '../../models/userModel';
 import {Project} from '../../models/projectModel';
 import {Task} from '../../models/taskModel';
+import {Label} from '../../models/labelModel';
 
 @Component({
   templateUrl: 'modalAddTask.html',
@@ -24,6 +25,7 @@ export class ModalAddTask {
   project: Project;
   users: Array<User>;
   projects: Array<Project>;
+  labels: Array<Label>;
 
   constructor(
     public platform: Platform,
@@ -38,8 +40,9 @@ export class ModalAddTask {
     this.project = params.get('project');
     if(this.project)
     {
-      // We populate the list of user
+      // We populate the list of available users and labels
       this.populateListUser();
+	  this.populateListLabel();
     }
 
     const task = params.get('task');
@@ -73,7 +76,7 @@ export class ModalAddTask {
     this.users = [];
     this.projectService.listProjectUsers(this.project.id).subscribe(
       response => {
-        this.accessList = response.json()
+        this.accessList = response.json();
         for(let access of this.accessList){
           this.userService.getUser(access.user).subscribe(
             response => {
@@ -90,6 +93,19 @@ export class ModalAddTask {
         console.log(err);
       }
     );
+  }
+  
+  populateListLabel(){
+	// Get list of existing labels for this project
+	this.labels = [];
+	this.projectService.listProjectLabels(this.project.id).subscribe(
+		response => {
+			this.labels = response.json();
+		},
+		err => {
+			console.log(err);
+		}
+	)
   }
 
   populateTask() {

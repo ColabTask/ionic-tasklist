@@ -3,8 +3,10 @@ import { Component } from '@angular/core';
 import { ModalController, NavController, NavParams, ToastController, PopoverController } from 'ionic-angular';
 
 import { TaskService } from '../../services/taskService';
+import { ProjectService } from '../../services/projectService';
 import { ModalAddTask } from '../modalAddTask/modalAddTask';
 import { Task } from '../../models/taskModel';
+import { Label } from '../../models/labelModel';
 import { Project } from '../../models/projectModel';
 
 @Component({
@@ -34,7 +36,10 @@ export class DetailTaskPopover {
 @Component({
   selector: 'detail-task',
   templateUrl: 'detailTask.html',
-  providers: [TaskService]
+  providers: [
+    TaskService,
+    ProjectService
+  ]
 })
 export class DetailTask {
   task: Task;
@@ -45,10 +50,20 @@ export class DetailTask {
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public popoverCtrl: PopoverController,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private projectService: ProjectService
   )
   {
     this.task = new Task(navParams.get("task"));
+    let labels = this.task.labels;
+    this.task.labels = [];
+    for(let label of labels) {
+        this.projectService.getLabel(label).subscribe(
+            response => {
+                this.task.labels.push(response.json());
+            }
+        )
+    }
     console.log(this.task);
   }
 
@@ -115,6 +130,15 @@ export class DetailTask {
     this.taskService.getTask(this.task.id).subscribe(
       response => {
         this.task = new Task(response.json());
+        let labels = this.task.labels;
+        this.task.labels = [];
+        for(let label of labels) {
+            this.projectService.getLabel(label).subscribe(
+                response => {
+                    this.task.labels.push(response.json());
+                }
+            )
+        }
       }
     );
   }
