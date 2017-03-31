@@ -49,6 +49,7 @@ export class ListTask {
     private taskService: TaskService,
     public toastCtrl: ToastController
   ) {
+    this.items = [];
     this.project = new Project(navParams.get("project"));
     this.getDataFromApi();
   }
