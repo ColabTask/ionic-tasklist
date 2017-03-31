@@ -24,6 +24,7 @@ export class ListProject {
     private projectService: ProjectService
   )
   {
+    this.items = [];
     this.getDataFromApi();
   }
 
