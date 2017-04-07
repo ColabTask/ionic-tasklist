@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { ListTask } from '../listTask/listTask';
+import { ListNotification } from '../listNotification/listNotification';
 import { ModalAddProject } from '../modalAddProject/modalAddProject';
 import {ProjectService} from '../../services/projectService';
 import { Project } from '../../models/projectModel';
@@ -36,6 +37,10 @@ export class ListProject {
     this.navCtrl.push(ListTask, {
       project: item
     });
+  }
+
+  notificationTapped() {
+    this.navCtrl.push(ListNotification);
   }
 
   deleteProject(item) {

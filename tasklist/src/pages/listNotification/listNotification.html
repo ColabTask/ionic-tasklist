@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar align-title="left" class="bar-positive" color="main">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>Notifications</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list inset>
+
+    <ion-item *ngFor="let notification of notifications">
+      <ion-item (click)="notificationTapped($event, notification)" class="notification {{notification.is_read ? 'read' : 'not-read'}} {{notification.target_type}}-{{notification.target_intention}}">
+        <table>
+          <tr>
+            <td class="container-icon">
+              <ion-icon *ngIf="notification.is_read" name="notifications-outline"></ion-icon>
+              <ion-icon *ngIf="!notification.is_read" name="notifications"></ion-icon>
+            </td>
+            <td class="container-content">
+              <p class="title">{{notification.title}}</p>
+              <p class="text">{{notification.text}}</p>
+              <p class="sender">From: <span class="name">{{notification.sender.username}}</span></p>
+            </td>
+          </tr>
+        </table>
+      </ion-item>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
