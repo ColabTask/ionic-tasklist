@@ -4,12 +4,13 @@ import { NavController, ToastController } from 'ionic-angular';
 
 import { ListProject } from '../listProject/listProject';
 import {AuthenticationService} from '../../services/authenticationService';
+import {SocketService} from '../../services/socketService';
 import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [AuthenticationService]
+  providers: [AuthenticationService,SocketService]
 })
 export class Login {
   username: string;
@@ -18,6 +19,7 @@ export class Login {
   constructor(
     public navCtrl: NavController,
     private authenticationService: AuthenticationService,
+    private socketService: SocketService,
     public toastCtrl: ToastController,
     public storage: Storage
   ) {
@@ -30,8 +32,25 @@ export class Login {
 
           this.authenticationService.authenticate(this.username, this.password).subscribe(
             data => {
-              this.storage.set('token', data.token)
+              this.storage.set('token', data.token);
+              this.storage.set('userid', data.id);
               this.navCtrl.setRoot(ListProject, { });
+
+              // When a user is authenticated start the connection to the socket server
+              this.socketService.connect(data.token, data.id).then(() => {
+                // Subscribe to the main channel: task
+                this.socketService.subscribe('task').then((stream:any) => {
+                  console.log(stream);
+					stream.subscribe(data => {
+					  // Toast notification
+					  let toast = this.toastCtrl.create({
+						message: "You have a new assgined task: " + data.title,
+						dismissOnPageChange: true
+					  });
+					  toast.present();
+					})
+                })
+              });
             }
           );
         });
@@ -45,8 +64,25 @@ export class Login {
         // Redirect after control
         this.storage.set('username', this.username);
         this.storage.set('password', this.password);
-        this.storage.set('token', data.token)
+        this.storage.set('token', data.token);
+        this.storage.set('userid', data.id);
         this.navCtrl.setRoot(ListProject, { });
+
+        // When a user is authenticated start the connection to the socket server
+        this.socketService.connect(data.token, data.id).then(() => {
+          // Subscribe to the main channel: task
+          this.socketService.subscribe('task').then((stream:any) => {
+            console.log(stream);
+            stream.subscribe(data => {
+              // Toast notification
+              let toast = this.toastCtrl.create({
+                message: "You have a new assgined task: " + data.title,
+                dismissOnPageChange: true
+              });
+              toast.present();
+            })
+          })
+        });
       },
       err => {
         let toast = this.toastCtrl.create({
