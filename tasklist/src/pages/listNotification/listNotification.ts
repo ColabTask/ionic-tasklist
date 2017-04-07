@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ModalController, NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { NotificationService } from "../../services/notificationService";
 

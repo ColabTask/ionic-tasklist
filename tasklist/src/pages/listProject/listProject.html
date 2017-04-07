@@ -18,7 +18,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-list inset>
+  <p *ngIf="!items.length" text-center>
+    You do not have a project at this moment.
+  </p>
+  <ion-list inset *ngIf="items.length">
 
     <ion-item-sliding *ngFor="let item of items">
       <ion-item (click)="itemTapped($event, item)">

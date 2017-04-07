@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar color="main">
-    <ion-title>
-      New project
-    </ion-title>
+    <ion-title *ngIf="project.id">Edit project</ion-title>
+    <ion-title *ngIf="!project.id">New project</ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <span ion-text color="primary" showWhen="ios">Cancel</span>
@@ -18,6 +17,7 @@
       <ion-label floating>Name</ion-label>
       <ion-input type="text" [(ngModel)]="project.name" name="name"></ion-input>
     </ion-item>
-    <button ion-button type="submit" block>Add Project</button>
+    <button *ngIf="project.id" ion-button type="submit" block>Edit Project</button>
+    <button *ngIf="!project.id" ion-button type="submit" block>Add Project</button>
   </form>
 </ion-content>

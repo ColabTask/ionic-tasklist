@@ -8,7 +8,7 @@ import { ListNotification } from '../pages/listNotification/listNotification';
 import { ModalAddProject } from '../pages/modalAddProject/modalAddProject';
 import { ModalAddTask } from '../pages/modalAddTask/modalAddTask';
 import { Login } from '../pages/login/login';
-import { DetailTask } from '../pages/detailTask/detailTask';
+import { DetailTask, DetailTaskPopover } from '../pages/detailTask/detailTask';
 import { MyTask } from '../pages/myTask/myTask';
 import { Storage } from '@ionic/storage';
 import { Config } from '../config/config';
@@ -25,7 +25,8 @@ import { Config } from '../config/config';
     ModalAddTask,
     PopOverPage,
 	  MyTask,
-    ListNotification
+    ListNotification,
+    DetailTaskPopover
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -44,7 +45,8 @@ import { Config } from '../config/config';
     ModalAddTask,
     PopOverPage,
 	  MyTask,
-    ListNotification
+    ListNotification,
+    DetailTaskPopover
   ],
   providers: [
     {

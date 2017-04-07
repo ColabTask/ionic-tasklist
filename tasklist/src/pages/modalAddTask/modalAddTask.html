@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar color="main">
-    <ion-title>
-      New task
-    </ion-title>
+    <ion-title *ngIf="task.id">Edit task</ion-title>
+    <ion-title *ngIf="!task.id">New task</ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <span ion-text color="primary" showWhen="ios">Cancel</span>
@@ -45,11 +44,12 @@
 
     <ion-item>
       <ion-label stacked>Assigned to</ion-label>
-      <ion-select [(ngModel)]="task.assigned" name="assigned">
+      <ion-select [(ngModel)]="task.assigned.id" name="assigned">
         <ion-option *ngFor="let user of users" value="{{user.id}}">{{user.username}}</ion-option>
       </ion-select>
     </ion-item>
 
-    <button ion-button type="submit" block>Add Task</button>
+    <button *ngIf="task.id" ion-button type="submit" block>Edit Task</button>
+    <button *ngIf="!task.id" ion-button type="submit" block>Add Task</button>
   </form>
 </ion-content>
